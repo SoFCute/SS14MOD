@@ -1,0 +1,47 @@
+- type: constructionGraph
+  id: MODBase
+  start: start
+  graph:
+  - node: start
+    entity: Modconstruction
+    edges:
+
+    - to: start
+      conditions:
+      - !type:ContainerNotEmpty
+        container: part-container
+      steps:
+      - tool: Prying
+        doAfter: 0.5
+        completed:
+          - !type:EmptyAllContainers
+
+    - to: MODBase
+      steps:
+      - assemblyId: generic
+        guideString: MOD-construction-guide-string
+
+      - tool: Screwing
+        doAfter: 0.5
+
+      - component: PowerCell
+        name: power cell
+        store: cell_slot
+        icon:
+          sprite: Objects/Power/power_cells.rsi
+          state: small
+
+      - material: Cable
+        amount: 1
+        doAfter: 1
+        store: part-container
+
+      - tool: Screwing
+        doAfter: 0.5
+
+      - component: StandardArmor
+        name: Standard_armor
+        store: armor_slot
+        icon:
+          sprite: 
+          state: small
